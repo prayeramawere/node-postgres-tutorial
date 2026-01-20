@@ -36,6 +36,39 @@ app.get("/fetch-data", (req, res) => {
   });
 });
 
+app.get("/fetch-by-id/:id", async (req, res) => {
+  const { id } = req.params;
+
+  const search_query = `SELECT * FROM demotable WHERE id = $1 ORDER BY name DESC`;
+
+  con.query(search_query, [id], (err, result) => {
+    err
+      ? res.json({ success: false, msg: err })
+      : res.json({ success: true, data: result.rows });
+  });
+});
+
+app.put("/update/:id", (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+
+  const update_user_query = `UPDATE demotable SET name = $1 WHERE id = $2`;
+
+  con.query(update_user_query, [name, id], (err, result) => {
+    err
+      ? res.json({ success: false, msg: err })
+      : res.json({ success: true, data: result });
+  });
+});
+app.delete("/deleteall", (req, res) => {
+  const delete_query = `DELETE  FROM demotable`;
+  con.query(delete_query, (err, result) => {
+    err
+      ? res.json({ success: false, msg: err })
+      : res.json({ success: true, data: result });
+  });
+});
+
 app.listen(4000, () => {
   console.log(`app running live at: http://localhost:4000`);
 });
