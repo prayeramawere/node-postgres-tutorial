@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/prayeramawere/node-postgres-tutorial/issues"
   },
-  "homepage": "https://github.com/prayeramawere/node-postgres-tutorial#readme"
+  "homepage": "https://github.com/prayeramawere/node-postgres-tutorial#readme",
+  "dependencies": {
+    "pg": "^8.17.1"
+  }
 }
